@@ -1,10 +1,10 @@
 #root {
   height: 100vh;
   background: pink;
-  background-image: url('../public/bgc.jpg');
+  background-image: url("../public/bgc.jpg");
   background-repeat: no-repeat;
 
   &::before {
-    content: '1234';
+    content: "1234";
   }
 }
