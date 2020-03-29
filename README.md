@@ -1,2 +1,2 @@
-# webpack 知识点记录
+# webpack 知识点集合
 
