@@ -65,6 +65,35 @@ module.exports = {
         ]
       },
       {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "eslint-loader",
+        options: {
+          fix: true // 自动修复格式错误
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+        options: {
+          preset: [
+            "@babel/preset-env",
+            {
+              useBuiltIns: "usage", // 按需加载
+              corejs: {
+                // 使用的库及版本
+                version: 3
+              },
+              targets: {
+                // 兼容的版本
+                chrome: 49
+              }
+            }
+          ]
+        }
+      },
+      {
         exclude: /\.(html|css|js|scss|sass|jpg|jpeg|png|gif|svg|webp)$/, // 排除 html... 资源
         loader: "file-loader",
         options: {
@@ -78,7 +107,11 @@ module.exports = {
   plugins: [
     // 会自动引入打包后生成的资源
     new HtmlWebpackPlugin({
-      template: "./public/index.html"
+      template: "./public/index.html",
+      minify: {
+        collapseWhitespace: true, // 移除空格
+        removeComments: true // 移除注释
+      }
     }),
     new MiniCssExtractPlugin({
       filename: "css/main.css"
@@ -95,6 +128,6 @@ module.exports = {
   },
 
   // 模式
-  // 开发环境(development), 生产环境(production)
+  // 开发环境(development), 生产环境(production)自动压缩js
   mode: "development"
 };
